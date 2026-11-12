@@ -16,12 +16,12 @@ GitHub Pages の公開URL（例：`https://ユーザー名.github.io/trigger-act
 | `index.html` | ゲーム本体（1ファイル。中の目次から各部へ飛べる） |
 | `manifest.webmanifest` | アプリとしての名前・アイコン・横向き・全画面の設定 |
 | `sw.js` | 一度読み込んだ物を保存して、ネットなしでも起動できるようにする裏方 |
-| `icons/` | アイコン（192px・512px・Android用の余白つき） |
+| `icon-192.png` `icon-512.png` `icon-512-maskable.png` | アイコン（192px・512px・Android用の余白つき）。スマホからでも上げやすいよう、フォルダに入れず一番上に置く |
 
 ## 公開のしかた（はじめて）
 
 1. GitHub で新しいリポジトリを作る（例：`trigger-action`、Public）。
-2. このフォルダの中身（`index.html` `manifest.webmanifest` `sw.js` `README.md` `icons/`）を全部アップロードする（「Add file」→「Upload files」に、まとめてドラッグ）。
+2. このフォルダの中身（`index.html` `manifest.webmanifest` `sw.js` `README.md` と、アイコン3つ）を全部アップロードする（「Add file」→「Upload files」に、まとめてドラッグ）。
 3. リポジトリの「Settings」→「Pages」→「Build and deployment」で、Source を「Deploy from a branch」、Branch を `main` と `/ (root)` にして「Save」。
 4. 1〜2分待つと、同じ画面の上に公開URLが出る。
 
