@@ -3,6 +3,7 @@
   "short_name": "TRIGGER ACTION",
   "description": "トリガーを組み合わせて戦う3Dアクション（試作）",
   "lang": "ja",
+  "id": "./?app=trigger-action-2",
   "start_url": "./",
   "scope": "./",
   "display": "fullscreen",
