@@ -4,7 +4,7 @@
    three.js などインターネットから読み込む部品（cdn.jsdelivr.net）は、版が決まっていて変わらないので、保存してある物を先に使う
    → 一度開いたことがあれば、ネットにつながっていなくても起動できる（オンライン対戦はネットが必要）
    ゲームを新しくしたら、下の VERSION を変えると古い保存が消える */
-const VERSION = 'ta-v0.92';
+const VERSION = 'ta-v0.93';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-512-maskable.png'];
 
 self.addEventListener('install', e => {
