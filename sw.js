@@ -1,9 +1,10 @@
 /* TRIGGER ACTION のサービスワーカー（アプリとして動かすための裏方）
-   ・ゲーム本体（index.html など）は、まず保存してある物を使い、裏で新しい物を取ってくる
-   ・three.js などインターネットから読み込む部品（cdn.jsdelivr.net）も、一度読み込んだら保存しておく
+   v0.84d：ゲーム本体・アプリの設定（manifest）・アイコンは「まずネットから新しい物」を取り、つながらないときだけ保存してある物を使う
+           （前は保存してある物を先に使っていたので、ファイルを入れかえてもしばらく古いままだった）
+   three.js などインターネットから読み込む部品（cdn.jsdelivr.net）は、版が決まっていて変わらないので、保存してある物を先に使う
    → 一度開いたことがあれば、ネットにつながっていなくても起動できる（オンライン対戦はネットが必要）
    ゲームを新しくしたら、下の VERSION を変えると古い保存が消える */
-const VERSION = 'ta-v0.84c';
+const VERSION = 'ta-v0.84d';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-512-maskable.png'];
 
 self.addEventListener('install', e => {
@@ -17,16 +18,24 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET')
     return;
   const url = new URL(req.url);
-  const cacheable = url.origin === location.origin || url.hostname === 'cdn.jsdelivr.net';
-  if (!cacheable)
-    return;   // オンライン対戦の通信などはそのまま
-  e.respondWith(caches.open(VERSION).then(async c => {
-    const hit = await c.match(req);
-    const net = fetch(req).then(res => {
+  if (url.origin === location.origin) {   // 自分のファイル：ネットを先に（新しい版がすぐ届く）
+    e.respondWith(caches.open(VERSION).then(c => fetch(req, { cache: 'no-cache' }).then(res => {
       if (res && res.ok)
         c.put(req, res.clone());
       return res;
-    }).catch(() => hit);
-    return hit || net;   // 保存してあればすぐ使い、裏で新しい物に入れかえる
-  }));
+    }).catch(() => c.match(req).then(hit => hit || c.match('./index.html')))));
+    return;
+  }
+  if (url.hostname === 'cdn.jsdelivr.net') {   // 版の決まった部品：保存を先に
+    e.respondWith(caches.open(VERSION).then(async c => {
+      const hit = await c.match(req);
+      if (hit)
+        return hit;
+      const res = await fetch(req);
+      if (res && res.ok)
+        c.put(req, res.clone());
+      return res;
+    }));
+  }
+  // それ以外（オンライン対戦の通信など）はそのまま
 });
