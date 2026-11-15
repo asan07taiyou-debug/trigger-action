@@ -3,8 +3,9 @@
            （前は保存してある物を先に使っていたので、ファイルを入れかえてもしばらく古いままだった）
    three.js などインターネットから読み込む部品（cdn.jsdelivr.net）は、版が決まっていて変わらないので、保存してある物を先に使う
    → 一度開いたことがあれば、ネットにつながっていなくても起動できる（オンライン対戦はネットが必要）
+   v0.94：ブルーム用の部品（postprocessing）も cdn.jsdelivr.net から読み込む。読み込めないときはブルームなしで動く
    ゲームを新しくしたら、下の VERSION を変えると古い保存が消える */
-const VERSION = 'ta-v0.93';
+const VERSION = 'ta-v0.94';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-512-maskable.png'];
 
 self.addEventListener('install', e => {
