@@ -5,7 +5,7 @@
    → 一度開いたことがあれば、ネットにつながっていなくても起動できる（オンライン対戦はネットが必要）
    v0.94：ブルーム用の部品（postprocessing）も cdn.jsdelivr.net から読み込む。読み込めないときはブルームなしで動く
    ゲームを新しくしたら、下の VERSION を変えると古い保存が消える */
-const VERSION = 'ta-v0.95';
+const VERSION = 'ta-v0.96';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-512-maskable.png'];
 
 self.addEventListener('install', e => {
