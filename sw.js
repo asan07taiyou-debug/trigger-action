@@ -4,8 +4,11 @@
    three.js などインターネットから読み込む部品（cdn.jsdelivr.net）は、版が決まっていて変わらないので、保存してある物を先に使う
    → 一度開いたことがあれば、ネットにつながっていなくても起動できる（オンライン対戦はネットが必要）
    v0.94：ブルーム用の部品（postprocessing）も cdn.jsdelivr.net から読み込む。読み込めないときはブルームなしで動く
+   v0.97：手ごたえの演出（ヒットストップ・画面の揺れ・視野の伸び）
+   v0.98：ステップ回避（Q・スマホはボタン）と近接の連撃（3段まで）
+   v0.99：スマホのボタンを小さくまとめた・ボタンの大きさの設定
    ゲームを新しくしたら、下の VERSION を変えると古い保存が消える */
-const VERSION = 'ta-v0.96';
+const VERSION = 'ta-v0.99';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-512-maskable.png'];
 
 self.addEventListener('install', e => {
